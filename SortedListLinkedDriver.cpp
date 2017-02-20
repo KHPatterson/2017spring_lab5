@@ -14,11 +14,11 @@ void addCDs(ListArray<CD>* list, ListBox<CD>* lb)
 
    //DO THIS
    //iterate over and add the cds to the list box (use lb->addItem)
-
-
-
-
-   delete iter;
+	while (curr.getNode() != NULL)
+	{
+		lb->addItem;
+	}
+	delete iter;
 }
 
 void deleteCDs(ListArray<CD>* list)
@@ -27,10 +27,12 @@ void deleteCDs(ListArray<CD>* list)
 
    //DO THIS  
    //iterate over and delete the cds
-
-
-
-
+	while(curr.getNode() != NULL)
+	{
+		NewNode<T>* node1 = curr;
+		SortedListLinked<T>::remove(curr.getItem());
+		curr = node1.getNext();
+	}
    delete iter;
 }
 

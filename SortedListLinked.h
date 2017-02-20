@@ -104,12 +104,18 @@ NextNode<T>** SortedListLinked<T>::find(T* item)
 
    //DO THIS
    //loop to find the correct location to insert/remove item
+   //!!!!!!!!!!!!!!!!!!!!!!! check for logic errors below
+	while (curr != NULL && (*compare_items)(item, curr->getItem() >= 0))//loop will break when node is equal to item
+	{
+		prev = curr;
+		curr = curr->getNext();
+	}
 
-
-
-
-
-
+	///add as comments later
+	//when the right spot is found, the loop should break
+	//then it it puts the prev and curr in a list
+	//so that when we add we can set prev to prev for the node and curr as the next
+	//and for remove we get the next of curr and set it prev's next, and delete curr
 
 
 
@@ -142,21 +148,18 @@ void SortedListLinked<T>::add(T* item)
 
    //DO THIS
    //adding to the top of the list (check prev)
-   if (           )
+   if ( prev == NULL )
    {
-
-
-
-
+		NextNode<T>* node1 = new NextNode<T>(item);
+		prev.setNext(node1);
+		node1.setNext(curr);
    }
    else    //general add
    {
-
-
-
-
+		NextNode<T>* node1 = new NextNode<T>(item);
+		prev.setNext(node1);
+		node1.setNext(curr);
    }
-
    sze++;
 }
 
@@ -187,26 +190,23 @@ void SortedListLinked<T>::remove(T* item)
    int compare = (*compare_items) (item, curr->getItem());
 
    //determine whether the item to be removed is present
-   if (                       )
+   if (find(item) == NULL )
    {
       return;  //item not present
    }
 
    //DO THIS
    //removing the top item (check prev)
-   if (         )
+   if ( curr.getNext() == NULL )
    {
-
-
-
-
+		prev = NULL;
+		curr = NULL;
+		delete curr;
    }
    else  //general remove
    {
-
-
-
-
+		prev.setNext(curr.getNext());
+		delete curr;
    }
 
    delete curr;
