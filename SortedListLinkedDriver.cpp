@@ -14,21 +14,12 @@ void addCDs(ListArray<CD>* list, SortedListLinked<CD>* lb)
 
    //DO THIS
    //iterate over and add the cds to the list box (use lb->addItem)
-<<<<<<< HEAD
-	while (curr.getNode() != NULL)
+	while (iter->hasNext())
 	{
-		lb->addItem;
+		CD* cd = iter->next();
+		lb->add(cd);
 	}
 	delete iter;
-=======
-   while (iter->hasNext())
-   {
-	   lb->add(iter->Next());
-   }
-
-
-   delete iter;
->>>>>>> 101859e353e2a3ee6cd04f3045a675b9c76942f5
 }
 
 void deleteCDs(ListArray<CD>* list)
@@ -37,23 +28,11 @@ void deleteCDs(ListArray<CD>* list)
 
    //DO THIS  
    //iterate over and delete the cds
-<<<<<<< HEAD
-	while(curr.getNode() != NULL)
+	while(iter->hasNext())
 	{
-		NewNode<T>* node1 = curr;
-		SortedListLinked<T>::remove(curr.getItem());
-		curr = node1.getNext();
+		CD* cd = iter->next();
+		delete cd;
 	}
-=======
-
-	while (iter->hasNext())
-   {
-	   CD* curr = iter->next();
-	   delete curr;
-   }
-
-
->>>>>>> 101859e353e2a3ee6cd04f3045a675b9c76942f5
    delete iter;
 }
 
@@ -62,9 +41,26 @@ int main(int argc, char* argv[])
    ListArray<CD>* cds = CD::readCDs("cds.txt");
    //DO THIS
    //create and test the sorted linked list 
-   
-   SortedListLinked<CD>* sll = new SortedListLinked<CD>(&(CSC2110::CD::compare_items));
+   SortedListLinked<CD>* list = new SortedListLinked<CD>(&CD::compare_items);
+   ListArrayIterator<CD>* iter = cds->iterator();
+while (iter->hasNext())//puts cds in sorted array
+{
+	CD* cd = iter->next();
+	list->add(cd);
+}
+delete iter;
 
+ListArrayIterator<CD>* iter2 = cds->iterator();
+while (iter2->hasNext())//puts cds in sorted array
+{
+	CD* cd = iter2->next();
+	cd->displayCD();
+}
+delete iter2;
+
+//deleteCDS(cds);
+delete list;
+delete cds;
 
    return 0;
 }
